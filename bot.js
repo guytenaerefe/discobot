@@ -15,11 +15,11 @@ discoBot.on("message", function(message){
         discoBot.reply(message, "brix is the best");
     } else if (message.content === 'what did you say') {
         discoBot.reply(message, 'we\'re taking the bots to isenguard');
-    } else if (message.content.indexOf('stackoverflow' > -1)) {
+    } else if (message.content.indexOf('stackoverflow' == 0)) {
 
         var filter = {
-            key: 'YOUR_API_KEY',
-            pagesize: 55555,
+            key: process.env.SE_API_KEY,
+            pagesize: 5,
             tagged: 'php',
             sort: 'activity',
             order: 'asc'
