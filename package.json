@@ -2,9 +2,10 @@
   "name": "discobot",
   "version": "1.0.0",
   "description": "Discord Bot using the Unofficial API",
-  "main": "bot.js",
+  "main": "./bot/bot.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./bot/bot.js",
+    "test": "mocha"
   },
   "keywords": [
     "Discord",
