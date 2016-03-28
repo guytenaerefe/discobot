@@ -1,12 +1,11 @@
 var Discord = require("discord.js");
-stackexchange = require('stackexchange');
+var stackexchange = require('stackexchange');
 require('dotenv').config();
  
 var options = { version: 2.2 }
 var context = new stackexchange(options);
 
 discoBot = new Discord.Client();
-//Debug and warning handlers, these log debug messages and warnings to console
 discoBot.on('debug', (m) => console.log('[debug]', m));
 discoBot.on('warn', (m) => console.log('[warn]', m));
 
@@ -15,7 +14,7 @@ discoBot.on('message', function(message){
         discoBot.reply(message, 'ok bye');
         process.exit();
     } else if (message.content === 'what did you say') {
-        discoBot.reply(message, 'we\'re taking the bots to isenguard');
+        discoBot.reply(message, 'we\'re taking the bots to isengard');
     } else if (message.content.indexOf('stackoverflow') == 0) {
 
         words = message.content.replace('stackoverflow', '');
@@ -30,19 +29,20 @@ discoBot.on('message', function(message){
         context.search.advanced(filter, function(err, results) {
             if (err) throw err;
 
-//            var question = JSON.parse(results);
-            console.log(results.items.tags);
-            //question.forEach(function(item, index) {
-            //    discoBot.reply(message, item.link);
-            //});
-//            console.log(question);
+            results.items.forEach(function(item, index) {
+                var creationDate = new Date(item.creation_date * 1000);
+                discoBot.reply(
+                    message, item.view_count + 
+                    ' viewed this question with a score of ' + item.score + 
+                    ' and  ' + (item.is_answered ? 'has an accepted answer' : 'still needs an answer')  + 
+                    '. (' + creationDate.toDateString()   +
+                    ') : '  + item.link);
+
+            });
         });        
 
     }
 
 });
 
-/**
- * Login
- */
 discoBot.login(process.env.USERNAME, process.env.PASSWORD).catch((e) => console.log(e));;
