@@ -83,7 +83,6 @@ discoBot.on('message', function(message){
                     ') - IMDB Rating: ' +  movie.imdb.rating + 
                     ' - Metacritic ' + movie.metacritic + 
                     ' - Plot summary: ' + movie.plot +
-                    ' - ' + movie.poster + 
                     ' - http://www.imdb.com/title/' + movie.imdb.id
                 );
             });
