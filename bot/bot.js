@@ -19,23 +19,23 @@ discoBot.on('message', function(message){
     } else if (message.content.indexOf('stackoverflow') == 0) {
 
         words = message.content.replace('stackoverflow', '');
-        console.log(words);
 
         var filter = {
             key: process.env.SE_API_KEY,
-            pagesize: 2,
-            //tagged: 'php',
-            intitle: words,
-            sort: 'score',
-            order: 'desc',
+            pagesize: 1,
+            q: words,
             site: 'stackoverflow'
         };
 
-        //context.questions.questions(filter, function(err, results) {
-        context.search.search(filter, function(err, results) {
+        context.search.advanced(filter, function(err, results) {
             if (err) throw err;
-        
-            console.log(results.items);
+
+//            var question = JSON.parse(results);
+            console.log(results.items.tags);
+            //question.forEach(function(item, index) {
+            //    discoBot.reply(message, item.link);
+            //});
+//            console.log(question);
         });        
 
     }
